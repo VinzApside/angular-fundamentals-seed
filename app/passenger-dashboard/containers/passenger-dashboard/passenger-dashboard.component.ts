@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import { Component, OnInit } from "@angular/core";
 
 import { Passenger } from "../../models/passenger-interface";
 
@@ -8,10 +8,10 @@ import { Passenger } from "../../models/passenger-interface";
   template: `
     <div>
       <h3>Airline Passenger</h3>
+      <passenger-count [items]="passengers"></passenger-count>
+      <passenger-detail></passenger-detail>
     </div>
     <div>
-      <div *ngIf="name.length > 2">Searching for ...{{ name }}</div>
-
       <ul>
         <li *ngFor="let passenger of passengers; let i = index">
           <span class="status" [class.checked-in]="passenger.checkedIn"></span>
@@ -31,28 +31,25 @@ import { Passenger } from "../../models/passenger-interface";
     </div>
   `
 })
-export class PassengerDashboardComponent {
-  title: string;
-  name: string = "";
-  passengers: Passenger[] = [
-    {
-      id: 1,
-      fullname: "Stephen",
-      checkedIn: true,
-      checkInDate: 149074200000,
-      children: null
-    },
-    {
-      id: 2,
-      fullname: "Stephanie",
-      checkedIn: false,
-      children: [{ name: "Ted", age: 12 }]
-    }
-  ];
-
-  handleChange(value: string) {
-    console.log(value);
-    this.name = value;
-  }
+export class PassengerDashboardComponent implements OnInit {
+  passengers: Passenger[];
   constructor() {}
+  ngOnInit() {
+    console.log("on init");
+    this.passengers = [
+      {
+        id: 1,
+        fullname: "Stephen",
+        checkedIn: true,
+        checkInDate: 149074200000,
+        children: null
+      },
+      {
+        id: 2,
+        fullname: "Stephanie",
+        checkedIn: false,
+        children: [{ name: "Ted", age: 12 }]
+      }
+    ];
+  }
 }
