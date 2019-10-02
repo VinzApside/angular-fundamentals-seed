@@ -12,29 +12,29 @@ interface Passenger {
   template: `
     <div class="app">
       <h1 [innerHTML]="title"></h1>
-      <div>
-        <input
-          type="text"
-          #username
-          (input)="handleChange($event.target.value)"
-        />
-      </div>
-      <template [ngIf]="name.length > 2">
-        <div>Searching for ...{{ name }}</div>
-      </template>
-
       <div *ngIf="name.length > 2">Searching for ...{{ name }}</div>
 
       <ul>
         <li *ngFor="let passenger of passengers; let i = index">
+          <span class="status" [class.checked-in]="passenger.checkedIn"></span>
           {{ i }} : {{ passenger.fullname }}
         </li>
       </ul>
+    </div>
 
+    <h1 [innerHTML]="title"></h1>
+    <div>
       <ul>
-        <template ngFor let-passenger let-i="index" [ngForOf]="passengers">
-          <li>{{ i }} : {{ passenger.fullname }}</li>
-        </template>
+        <li *ngFor="let passenger of passengers; let i = index">
+          <span
+            class="status"
+            [ngClass]="{
+              'checked-in': passenger.checkedIn,
+              'checked-out': !passenger.checkedIn
+            }"
+          ></span>
+          {{ i }} : {{ passenger.fullname }}
+        </li>
       </ul>
     </div>
   `
@@ -50,7 +50,7 @@ export class AppComponent {
     },
     {
       id: 2,
-      fullname: "Stephanine",
+      fullname: "Stephanie",
       checkedIn: false
     }
   ];
@@ -60,6 +60,6 @@ export class AppComponent {
     this.name = value;
   }
   constructor() {
-    this.title = "Say the value !";
+    this.title = "Airline passengers";
   }
 }
