@@ -1,9 +1,16 @@
 import { Component } from "@angular/core";
 
+interface Child {
+  name: string;
+  age: number;
+}
+
 interface Passenger {
   id: number;
   fullname: string;
   checkedIn: boolean;
+  checkInDate?: number;
+  children: Child[] | null;
 }
 
 @Component({
@@ -18,22 +25,16 @@ interface Passenger {
         <li *ngFor="let passenger of passengers; let i = index">
           <span class="status" [class.checked-in]="passenger.checkedIn"></span>
           {{ i }} : {{ passenger.fullname }}
-        </li>
-      </ul>
-    </div>
-
-    <h1 [innerHTML]="title"></h1>
-    <div>
-      <ul>
-        <li *ngFor="let passenger of passengers; let i = index">
-          <span
-            class="status"
-            [ngClass]="{
-              'checked-in': passenger.checkedIn,
-              'checked-out': !passenger.checkedIn
-            }"
-          ></span>
-          {{ i }} : {{ passenger.fullname }}
+          <p>{{ passenger | json }}</p>
+          <div class="date">
+            Check in date :
+            {{
+              passenger.checkInDate
+                ? (passenger.checkInDate | date: "yMMMMd" | uppercase)
+                : "Not checked in"
+            }}
+            <div>Children: {{ passenger.children?.length || 0 }}</div>
+          </div>
         </li>
       </ul>
     </div>
@@ -46,12 +47,15 @@ export class AppComponent {
     {
       id: 1,
       fullname: "Stephen",
-      checkedIn: true
+      checkedIn: true,
+      checkInDate: 149074200000,
+      children: null
     },
     {
       id: 2,
       fullname: "Stephanie",
-      checkedIn: false
+      checkedIn: false,
+      children: [{ name: "Ted", age: 12 }]
     }
   ];
 
