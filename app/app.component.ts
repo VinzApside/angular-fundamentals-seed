@@ -1,5 +1,11 @@
 import { Component } from "@angular/core";
 
+interface Passenger {
+  id: number;
+  fullname: string;
+  checkedIn: boolean;
+}
+
 @Component({
   selector: "app-root",
   styleUrls: ["app.Component.scss"],
@@ -9,27 +15,51 @@ import { Component } from "@angular/core";
       <div>
         <input
           type="text"
-          [ngModel]="name"
-          (ngModelChange)="handleChange($event)"
+          #username
+          (input)="handleChange($event.target.value)"
         />
-        <input type="text" [(ngModel)]="name" />
       </div>
-      <div>{{ name }}</div>
-      <button (click)="handleClick($event)">Change name</button>
+      <template [ngIf]="name.length > 2">
+        <div>Searching for ...{{ name }}</div>
+      </template>
+
+      <div *ngIf="name.length > 2">Searching for ...{{ name }}</div>
+
+      <ul>
+        <li *ngFor="let passenger of passengers; let i = index">
+          {{ i }} : {{ passenger.fullname }}
+        </li>
+      </ul>
+
+      <ul>
+        <template ngFor let-passenger let-i="index" [ngForOf]="passengers">
+          <li>{{ i }} : {{ passenger.fullname }}</li>
+        </template>
+      </ul>
     </div>
   `
 })
 export class AppComponent {
   title: string;
-  name: string = "Todd";
+  name: string = "";
+  passengers: Passenger[] = [
+    {
+      id: 1,
+      fullname: "Stephen",
+      checkedIn: true
+    },
+    {
+      id: 2,
+      fullname: "Stephanine",
+      checkedIn: false
+    }
+  ];
 
   handleChange(value: string) {
+    console.log(value);
     this.name = value;
   }
-  handleClick(event: any) {
-    this.name = "Name reset";
-  }
   constructor() {
-    this.title = "Say my name !";
+    this.title = "Say the value !";
   }
 }
