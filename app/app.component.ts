@@ -12,6 +12,7 @@ import { Component } from "@angular/core";
           [ngModel]="name"
           (ngModelChange)="handleChange($event)"
         />
+        <input type="text" [(ngModel)]="name" />
       </div>
       <div>{{ name }}</div>
       <button (click)="handleClick($event)">Change name</button>
