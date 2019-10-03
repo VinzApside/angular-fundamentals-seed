@@ -10,7 +10,8 @@ import { NotFoundComponent } from "./not-found.component";
 import { HomeComponent } from "./home.component";
 
 const routes: Routes = [
-  { path: "", component: HomeComponent, pathMatch: "full" },
+  // { path: "", component: HomeComponent, pathMatch: "full" },
+  { path: "", redirectTo: "passenger", pathMatch: "full" },
   { path: "**", component: NotFoundComponent }
 ];
 @NgModule({
@@ -20,6 +21,7 @@ const routes: Routes = [
     BrowserModule,
     CommonModule,
     FormsModule,
+    // RouterModule.forRoot(routes, { useHash: true }),
     RouterModule.forRoot(routes),
     //custom module
     PassengerDashboardModule

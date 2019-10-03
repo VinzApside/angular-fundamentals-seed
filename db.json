@@ -8,10 +8,9 @@
       "checkInDate": 149074200000
     },
     {
+      "fullname": "Louis",
       "id": 2,
-      "fullname": "Frears",
       "checkedIn": false,
-      "checkInDate": null,
       "baggage": ""
     },
     {
