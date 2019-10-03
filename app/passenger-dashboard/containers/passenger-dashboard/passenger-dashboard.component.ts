@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 
 import { Passenger } from "../../models/passenger-interface";
 import { PassengerDashboardService } from "../../passenger-dashboard.service";
+import { Observable } from "rxjs/Observable";
 
 @Component({
   selector: "passenger-dashboard",
