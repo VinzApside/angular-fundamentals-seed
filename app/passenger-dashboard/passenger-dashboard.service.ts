@@ -8,6 +8,7 @@ import {
 } from "@angular/http";
 import { Observable } from "rxjs/Observable";
 import "rxjs/add/operator/map";
+import "rxjs/add/operator/toPromise";
 import { Injectable } from "@angular/core";
 
 const PASSENGER_API: string = "/api/passengers";
@@ -15,10 +16,11 @@ const PASSENGER_API: string = "/api/passengers";
 @Injectable()
 export class PassengerDashboardService {
   constructor(private http: Http) {}
-  getPassengers(): Observable<Passenger[]> {
+  getPassengers(): Promise<Passenger[]> {
     return this.http
       .get(PASSENGER_API)
-      .map((response: Response) => response.json());
+      .toPromise()
+      .then((response: Response) => response.json());
   }
 
   updatePassengers(passenger: Passenger): Observable<Passenger> {
