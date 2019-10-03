@@ -32,7 +32,6 @@ import { Passenger } from "../../models/passenger-interface";
             ? (detail.checkInDate | date: "yMMMMd" | uppercase)
             : "Not checked in"
         }}
-        <div>Children: {{ detail.children?.length || 0 }}</div>
       </div>
       <p></p>
       <button (click)="toggleEdit()">{{ editing ? "done" : "edit" }}</button>

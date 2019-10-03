@@ -2,24 +2,24 @@
   "Passengers": [
     {
       "id": 1,
-      "fullname": "Stephen Frears",
+      "fullname": "Nono",
       "checkedIn": true,
       "checkInDate": 149074200000,
-      "children": null
+      "baggage": "none"
     },
     {
       "id": 2,
       "fullname": "Frears",
       "checkedIn": false,
       "checkInDate": null,
-      "children": null
+      "baggage": ""
     },
     {
       "id": 3,
       "fullname": "Stephen ",
       "checkedIn": false,
       "checkInDate": null,
-      "children": [{ "name": "john", "age": 12 }]
+      "baggage": ""
     }
   ]
 }
