@@ -17,7 +17,7 @@ import { EventEmitter } from "@angular/common/src/facade/async";
         <input
           required
           type="text"
-          name="name"
+          name="fullname"
           #fullname="ngModel"
           [ngModel]="detail?.fullname"
         />
